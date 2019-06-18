@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context/ http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util/ http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+    <bean id="mobile" class="org.rkm.Mobile" autowire="byName">
+        <property name="name" value="Motorola"/>
+    </bean>
+    <bean id="processor" class="org.rkm.Processor">
+        <property name="procName" value="Snapdragon"/>
+    </bean>
+    <bean id="emp" class="org.rkm.Required.EmpBean">
+        <property name="designation" value="SHO"/>
+    </bean>
+
+    <bean id="phone" class="org.rkm.Setter.PhoneBean" init-method="start" destroy-method="close">
+       <property name="brand" value="Apple"/>
+        <property name="id" value="1000"/>
+        <!--<constructor-arg name="brand" value="Windows"/>
+        <constructor-arg name="id" value="2001"/>-->
+    </bean>
+    <bean id="collection" class="org.rkm.Collection.CollectionBean">
+        <property name="empList">
+            <list>
+                <value>3333</value>
+                <value>1000</value>
+                <value>500</value>
+                <value>4000</value>
+                <value>8000</value>
+                <value>2000</value>
+            </list>
+        </property>
+        <property name="empSet">
+            <list>
+                <value>1000</value>
+                <value>1000</value>
+                <value>500</value>
+                <value>4000</value>
+                <value>8000</value>
+            </list>
+        </property>
+        <property name="empMap">
+            <map>
+                <entry key="100" value="3000"/>
+                <entry key="200" value="1111"/>
+                <entry key="44" value="4211"/>
+            </map>
+        </property>
+    </bean>
+    <bean id = "dataSource"
+          class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name = "driverClassName" value = "com.mysql.jdbc.Driver"/>
+        <property name = "url" value = "jdbc:mysql://localhost:3306/datastore"/>
+        <property name = "username" value = "root"/>
+        <property name = "password" value = "azure"/>
+    </bean>
+    <bean id = "studentJDBCTemplate"
+          class = "org.rkm.database.StockJdbcTemplete">
+        <property name = "dataSource" ref = "dataSource" />
+    </bean>
+    <task:annotation-driven/>
+</beans>
